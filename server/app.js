@@ -5,6 +5,9 @@ const logger       = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const mongoose     = require('mongoose');
+const cron = require("node-cron");
+const fs = require("fs");
+
 
 
 mongoose.connect('mongodb://localhost/server');
@@ -25,6 +28,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+    // schedule tasks to be run on the server   
+    cron.schedule("* * * * *", function() {
+      console.log("running a task every minute");
+
+      // * * * * * *
+      // | | | | | |
+      // | | | | | day of week
+      // | | | | month
+      // | | | day of month
+      // | | hour
+      // | minute
+      // second ( optional )
+
+
+      
+    });
+
+
 
 const index = require('./routes/index');
 app.use('/', index);

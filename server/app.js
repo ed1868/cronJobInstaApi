@@ -9,6 +9,8 @@ const cron = require("node-cron");
 const fs = require("fs");
 
 
+const axios = require('axios');
+const request = require('request');
 
 mongoose.connect('mongodb://localhost/server');
 
@@ -30,23 +32,58 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
+
     // schedule tasks to be run on the server   
-    cron.schedule("* * * * *", function() {
-      console.log("running a task every minute");
-
-      // * * * * * *
-      // | | | | | |
-      // | | | | | day of week
-      // | | | | month
-      // | | | day of month
-      // | | hour
-      // | minute
-      // second ( optional )
+    cron.schedule("* * * * *",  function() {
+      console.log('entro en el schedule');
+      let e = "supreme";
 
 
+      let config = {
+        baseURL: 'https://api.unsplash.com' , 
+        headers: {
+          Authorization:
+            "Client-ID 99c39db334d3eb60a9159c928d1aee0bdd30879521c2669a6424a8a4de8f7096"
+        },
+        params: { query: e },
+      }
       
+      axios.get("https://api.unsplash.com/search/photos",{    
+        
+      baseURL: 'https://api.unsplash.com' , 
+      headers: {
+        Authorization:
+          "Client-ID 99c39db334d3eb60a9159c928d1aee0bdd30879521c2669a6424a8a4de8f7096"
+      },
+      params: { query: e },
+        
+      }).then((response) => {
+        console.log(response);
+      })
+
+      // onSearchSubmit = (e) => {
+      //   console.log(e);
+
+      //  const apiResponse =  unsplash.get("https://api.unsplash.com/search/photos", {
+      //     params: { query: e },
+    
+      //   }).then((response) => {
+      //     return response;
+      //   });
+
+
+
+      // };
+
+
+
+
+      // onSearchSubmit(e);
+
     });
 
+    
 
 
 const index = require('./routes/index');

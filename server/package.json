@@ -13,6 +13,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "hbs": "~4.0.1",
+    "instagram-private-api": "^1.28.0",
     "mongoose": "~4.8.5",
     "morgan": "^1.9.1",
     "node-cron": "^2.0.3",

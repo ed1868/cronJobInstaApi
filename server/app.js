@@ -59,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
       params: { query: e },
         
       }).then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
 
       // onSearchSubmit = (e) => {

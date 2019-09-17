@@ -39,15 +39,6 @@ app.use(express.static(path.join(__dirname, 'public')));
       console.log('entro en el schedule');
       let e = "supreme";
 
-
-      let config = {
-        baseURL: 'https://api.unsplash.com' , 
-        headers: {
-          Authorization:
-            "Client-ID 99c39db334d3eb60a9159c928d1aee0bdd30879521c2669a6424a8a4de8f7096"
-        },
-        params: { query: e },
-      }
       
       axios.get("https://api.unsplash.com/search/photos",{    
         
@@ -60,26 +51,32 @@ app.use(express.static(path.join(__dirname, 'public')));
         
       }).then((response) => {
         console.log(response.data);
-      })
-
-      // onSearchSubmit = (e) => {
-      //   console.log(e);
-
-      //  const apiResponse =  unsplash.get("https://api.unsplash.com/search/photos", {
-      //     params: { query: e },
-    
-      //   }).then((response) => {
-      //     return response;
-      //   });
+      });
 
 
+(async () => {
+  const ig = new IgApiClient();
+  ig.state.generateDevice(process.env.IG_USERNAME);
+  ig.state.proxyUrl = process.env.IG_PROXY;
+  const auth = await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
+  console.log(JSON.stringify(auth));
 
-      // };
+  // getting random square image from internet
+  const imageRequest = await get({
+    url: 'https://picsum.photos/800/800', // random picture with 800x800 size
+    encoding: null, // this is required, we could convert body to buffer only with null encoding
+  });
 
+  // converting image body to buffer
+  const imageBuffer = Buffer.from(imageRequest.body, 'binary');
 
+  const publishResult = await ig.publish.photo({
+    file: imageBuffer, // image buffer, you also can specify image from your disk using fs
+    caption: 'Really nice photo from the internet! 💖', // nice caption (optional)
+  });
 
-
-      // onSearchSubmit(e);
+  console.log(publishResult); // publishResult.status should be "ok"
+})();
 
     });
 

@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
     // schedule tasks to be run on the server   
     cron.schedule("* * * * *",  function() {
       console.log('entro en el schedule');
-      let e = "supreme";
+      let travelQuery = "spain";
 
       
       axios.get("https://api.unsplash.com/search/photos",{    
@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
         Authorization:
           "Client-ID 99c39db334d3eb60a9159c928d1aee0bdd30879521c2669a6424a8a4de8f7096"
       },
-      params: { query: e },
+      params: { query: travelQuery },
         
       }).then((response) => {
         console.log(response.data);

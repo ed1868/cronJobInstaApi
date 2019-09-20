@@ -14,7 +14,7 @@
     "fs": "0.0.1-security",
     "hbs": "~4.0.1",
     "ig-upload": "^1.0.2",
-    "instagram-private-api": "^1.28.0",
+    "instagram-private-api": "^1.29.0",
     "mongoose": "~4.8.5",
     "morgan": "^1.9.1",
     "node-cron": "^2.0.3",

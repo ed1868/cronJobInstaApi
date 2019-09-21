@@ -50,7 +50,24 @@ app.use(express.static(path.join(__dirname, 'public')));
       params: { query: travelQuery },
         
       }).then((response) => {
-        console.log(response.data);
+
+        let apiResults = response.data.results;
+
+        let topPicks = [];
+
+        for(let i=0; i < 15 ; i++){
+          topPicks.push(apiResults);
+        }
+
+        console.log(topPicks);
+        // let pictureUrl = ;
+
+        console.log(apiResults);
+
+
+
+
+
       });
 
 

@@ -30,8 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-randomItem = items => {
-  return items[Math.floor(Math.random() * 2)];
+instagramPublish = (pictureDescription, urlFull, altDescription,title,city,country) => {
+  console.log('entro');
 };
 
 // schedule tasks to be run on the server
@@ -77,6 +77,7 @@ cron.schedule("* * * * *", function() {
       let country = response.data.location.country;
       let coordinates = [`${response.data.location.position.latitude}`, `${response.data.location.position.longitude}`];
 
+      instagramPublish(pictureDescription, urlFull, altDescription,title,city,country);
 
 
     });

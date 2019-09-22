@@ -40,7 +40,7 @@ cron.schedule("* * * * *", function() {
   let travelQuery = "spain";
 
   axios
-    .get("https://api.unsplash.com/search/photos", {
+    .get("https://api.unsplash.com/photos/random", {
       baseURL: "https://api.unsplash.com",
       headers: {
         Authorization:
@@ -51,8 +51,8 @@ cron.schedule("* * * * *", function() {
                }
     })
     .then(response => {
-      let apiResults = response.data.results;
-      console.log(apiResults[0]);
+  
+      console.log(response);
 //       let topPicks = [];
 
 //       for (let i = 0; i < 2; i++) {

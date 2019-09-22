@@ -52,8 +52,26 @@ cron.schedule("* * * * *", function() {
     })
     .then(response => {
   
-      console.log(response);
-//       let topPicks = [];
+      let payload = response.data;
+      let pictureDescription = response.data.description;
+      let altDescription = response.data.description;
+      let url = response.urls.full;
+      let downloadLink = response.links.download;
+      let user = response.user.name;
+      let userName = response.user.username;
+      let userPicture = response.user.profile_image.large;
+      let instagramUsername = response.user.instagram_username;
+      let photoMake = response.exif.make;
+      let photoModel = response.exif.model;
+      let title = response.location.title;
+      let city = response.location.city;
+      let country = response.location.country;
+      let coordinates = [' `${response.location.position.latitude}`, `${response.location.position.longitude}`'];
+
+      console.log(payload);
+
+
+      //       let topPicks = [];
 
 //       for (let i = 0; i < 2; i++) {
 //         topPicks.push(apiResults);

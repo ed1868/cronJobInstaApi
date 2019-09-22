@@ -36,7 +36,7 @@ randomItem = items => {
 
 // schedule tasks to be run on the server
 cron.schedule("* * * * *", function() {
-  console.log("entro en el schedule");
+  console.log("Cron Job Initiated");
   let travelQuery = "spain";
 
   axios
@@ -53,33 +53,32 @@ cron.schedule("* * * * *", function() {
     .then(response => {
   
       let payload = response.data;
+
+      console.log(Object.keys(payload));
+
+      //PICTURE INFO
       let pictureDescription = response.data.description;
-      let altDescription = response.data.description;
-      let url = response.urls.full;
-      let downloadLink = response.links.download;
-      let user = response.user.name;
-      let userName = response.user.username;
-      let userPicture = response.user.profile_image.large;
-      let instagramUsername = response.user.instagram_username;
-      let photoMake = response.exif.make;
-      let photoModel = response.exif.model;
-      let title = response.location.title;
-      let city = response.location.city;
-      let country = response.location.country;
-      let coordinates = [' `${response.location.position.latitude}`, `${response.location.position.longitude}`'];
+      let  altDescription= response.data.alt_description;
+      let urls = response.data.urls;
+      let urlFull = response.data.urls.full;
+      let downloadLink = response.data.links.download;
 
-      console.log(payload);
+      //USER FROM PICTURE DATA
+      let user = response.data.user.name;
+      let userName = response.data.user.username;
+      let userPicture = response.data.user.profile_image.large;
+      let instagramUsername = response.data.user.instagram_username;
+
+      //PICTURE LOCATION DATA 
+      let photoMake = response.data.exif.make;
+      let photoModel = response.data.exif.model;
+      let title = response.data.location.title;
+      let city = response.data.location.city;
+      let country = response.data.location.country;
+      let coordinates = [`${response.data.location.position.latitude}`, `${response.data.location.position.longitude}`];
 
 
-      //       let topPicks = [];
 
-//       for (let i = 0; i < 2; i++) {
-//         topPicks.push(apiResults);
-//       }
-
-//       // console.log(topPicks.length);
-// console.log(topPicks);
-// console.log(topPicks.length);
     });
 });
 
